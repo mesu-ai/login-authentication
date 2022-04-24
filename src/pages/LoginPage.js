@@ -79,7 +79,7 @@ const LoginPage = () => {
 
             <TextField
             id="loginId"
-            label="Email"
+            // label="Email"
             type='email'
             placeholder='abc@example.com'
             onBlur={handleOnBlur}
