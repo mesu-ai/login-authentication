@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const [loginData,setLoginData]=useState({});
 
     const [values, setValues] = React.useState({
@@ -48,7 +48,7 @@ const LoginPage = () => {
     const submitHandler=(e)=>{
         console.log(loginData);
 
-        axios.post('http://localhost:5000/user/login/',loginData)
+        axios.post('http://localhost:5000/user/signup/',loginData)
         .then(res=>{
           console.log(res);
         })
@@ -68,9 +68,9 @@ const LoginPage = () => {
     return (
         
       
-        <Box sx={{bgcolor:'wheat',p:{md:5,xs:2}}}>
+        <Box sx={{bgcolor:'wheat',p:{md:6,xs:2}}}>
           <Typography variant="h3" gutterBottom component="div">
-            Login
+            SignUp
           </Typography>
 
 
@@ -87,6 +87,15 @@ const LoginPage = () => {
           noValidate
           autoComplete="off">
 
+            <TextField
+            id="nameId"
+            // label="Email"
+            type='text'
+            placeholder='Enter Name'
+            onBlur={handleOnBlur}
+            name='name'
+            //variant="standard"
+            />
 
             <TextField
             id="loginId"
@@ -136,19 +145,18 @@ const LoginPage = () => {
             //variant="standard"
             /> 
 
-          <Button  type="submit" sx={{backgroundColor:'info.main',mt:3,fontWeight:'bold',px:4}} variant="contained">Login</Button>
-
+          <Button  type="submit" sx={{backgroundColor:'info.main',mt:3,fontWeight:'bold',px:4}} variant="contained">SignUp</Button>
 
           </Box>
-          <Link to='/signup' style={{textDecoration:'none'}}>
+
+          <Link to='/login' style={{textDecoration:'none'}}>
           <Typography sx={{mt:5}} variant="body1" gutterBottom component="div">
-            Haven't any account? SignUp now..
+            Have a account? Login now..
           </Typography>
           </Link>
-          
 
         </Box>
     );
 };
 
-export default LoginPage;
+export default SignUpPage;
