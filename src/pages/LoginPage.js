@@ -13,6 +13,10 @@ const LoginPage = () => {
   const [loginData,setLoginData]=useState({});
   const navigate=useNavigate();
 
+  // const { isError, isLoading, error, mutateAsync } = useMutation((data) => fetchTokensOrSignIn(data, t));
+
+	// const { dispatch } = useAuth();
+
     const [values, setValues] = React.useState({
         password: '',
         showPassword: false,
@@ -48,12 +52,19 @@ const LoginPage = () => {
 
     const submitHandler=(e)=>{
         console.log(loginData);
+        // const response = await mutateAsync(data);
+
+        // if (response.success) {
+        //   dispatch(setAuthToken());
+        //   navigateTo('/');
+        // }
 
         axios.get(`http://localhost:5000/user?email=${loginData?.email}&&password=${loginData?.password}`,loginData)
         .then(res=>{
           console.log(res);
           if(res.data){
             navigate('/home');
+            // dispatch(setAuthToken());
           }
           
         })
