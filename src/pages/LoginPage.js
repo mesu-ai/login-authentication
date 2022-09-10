@@ -5,12 +5,13 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 const axios = require('axios');
 
 
 const LoginPage = () => {
   const [loginData,setLoginData]=useState({});
+  const navigate=useNavigate();
 
     const [values, setValues] = React.useState({
         password: '',
@@ -48,16 +49,15 @@ const LoginPage = () => {
     const submitHandler=(e)=>{
         console.log(loginData);
 
-        axios.post('http://localhost:5000/user/login/',loginData)
+        axios.get(`http://localhost:5000/user?email=${loginData?.email}&&password=${loginData?.password}`,loginData)
         .then(res=>{
           console.log(res);
+          if(res.data){
+            navigate('/home');
+          }
+          
         })
         .catch((err)=>console.log(err))
-
-
-
-       
-
         e.preventDefault();
 
     }
@@ -91,10 +91,10 @@ const LoginPage = () => {
             <TextField
             id="loginId"
             // label="Email"
-            type='text'
+            type='email'
             placeholder='abc@example.com'
             onBlur={handleOnBlur}
-            name='username'
+            name='email'
             InputProps={{
             startAdornment: (
             <InputAdornment position="start">

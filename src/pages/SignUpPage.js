@@ -10,7 +10,7 @@ const axios = require('axios');
 
 
 const SignUpPage = () => {
-  const [loginData,setLoginData]=useState({});
+  const [registerData,setRegisterData]=useState({});
 
     const [values, setValues] = React.useState({
         password: '',
@@ -38,17 +38,17 @@ const SignUpPage = () => {
         const field=e.target.name;
         const value=e.target.value;
 
-        const newLoginData={...loginData};
+        const newLoginData={...registerData};
         newLoginData[field]=value;
-        setLoginData(newLoginData);
+        setRegisterData(newLoginData);
 
 
     }
 
     const submitHandler=(e)=>{
-        console.log(loginData);
+        console.log(registerData);
 
-        axios.post('http://localhost:5000/user/signup/',loginData)
+        axios.post('http://localhost:5000/user',registerData)
         .then(res=>{
           console.log(res);
         })
@@ -100,10 +100,10 @@ const SignUpPage = () => {
             <TextField
             id="loginId"
             // label="Email"
-            type='text'
+            type='email'
             placeholder='abc@example.com'
             onBlur={handleOnBlur}
-            name='username'
+            name='email'
             InputProps={{
             startAdornment: (
             <InputAdornment position="start">
